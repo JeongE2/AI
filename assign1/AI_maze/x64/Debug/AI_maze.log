@@ -1,0 +1,4 @@
+﻿  maze0.cpp
+C:\Users\Jeong\source\repos\AI_maze\maze0.cpp(44,6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+C:\Users\Jeong\source\repos\AI_maze\maze0.cpp(177,6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+  AI_maze.vcxproj -> C:\Users\Jeong\source\repos\AI_maze\x64\Debug\AI_maze.exe
