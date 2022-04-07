@@ -22,7 +22,7 @@ void add(element item)
 		return;
 	}
 	stack[++top] = item;
-	//vnodes++; //bfs »ç¿ë½Ã ÁÖ¼®Ã³¸®
+	//vnodes++; //bfs ì‚¬ìš©ì‹œ ì£¼ì„ì²˜ë¦¬
 	length++;
 }
 
@@ -41,7 +41,7 @@ typedef struct {
 } offsets;
 offsets move_[8];
 
-void path(void) {// ¹Ì·Î¸¦ Åë°úÇÏ´Â °æ·Î°¡ Á¸ÀçÇÒ °æ¿ì, ÀÌ¸¦ Ãâ·Â
+void path(void) {// ë¯¸ë¡œë¥¼ í†µê³¼í•˜ëŠ” ê²½ë¡œê°€ ì¡´ìž¬í•  ê²½ìš°, ì´ë¥¼ ì¶œë ¥
 	int i, row, col, next_row, next_col, dir;
 	int found = 0;
 	element position;
@@ -55,36 +55,36 @@ void path(void) {// ¹Ì·Î¸¦ Åë°úÇÏ´Â °æ·Î°¡ Á¸ÀçÇÒ °æ¿ì, ÀÌ¸¦ Ãâ·Â
 	move_[6].x =  0; move_[6].y = -1;
 	move_[7].x = -1; move_[7].y = -1;
 	
-	// ¹Ì·ÎÀÇ ÀÔ±¸ÁÂÇ¥¿Í E ¹æÇâÀ¸·Î stack ÃÊ±âÈ­
+	// ë¯¸ë¡œì˜ ìž…êµ¬ì¢Œí‘œì™€ E ë°©í–¥ìœ¼ë¡œ stack ì´ˆê¸°í™”
 	mark[START_ROW][START_COL] = 1; top = 0;
 	stack[0].row = START_ROW; stack[0].col = START_COL; stack[0].dir = 2;
 
-	while ( top > -1 && !found )  {// stackÀÌ empty°¡ ¾Æ´Ï°í, ¾ÆÁ÷
-								   // °æ·Î¸¦ ¹ß°ß ¸øÇÒ ¶§±îÁö ½ÇÇà
-		position = delete_();// topÀÇ À§Ä¡·Î ÀÌµ¿
+	while ( top > -1 && !found )  {// stackì´ emptyê°€ ì•„ë‹ˆê³ , ì•„ì§
+								   // ê²½ë¡œë¥¼ ë°œê²¬ ëª»í•  ë•Œê¹Œì§€ ì‹¤í–‰
+		position = delete_();// topì˜ ìœ„ì¹˜ë¡œ ì´ë™
 		row = position.row;   
 		col = position.col;
 		dir = position.dir;
 
-		while (dir < 8 && !found) {// 8¹æÇâÀ» Â÷·Ê´ë·Î °Ë»ç
+		while (dir < 8 && !found) {// 8ë°©í–¥ì„ ì°¨ë¡€ëŒ€ë¡œ ê²€ì‚¬
 			next_row = row + move_[dir].x;// move in direction dir
 			next_col = col + move_[dir].y;
 			if ( next_row == EXIT_ROW && next_col == EXIT_COL )
-				found = 1;// Ãâ±¸ ¹ß°ß. °æ·Î´Â ¾îµð¿¡?
+				found = 1;// ì¶œêµ¬ ë°œê²¬. ê²½ë¡œëŠ” ì–´ë””ì—?
 			else if ( !maze[next_row][next_col] &&
-				!mark[next_row][next_col] ) {// ¾ÆÁ÷ ¾È °¡º» ±æ
+				!mark[next_row][next_col] ) {// ì•„ì§ ì•ˆ ê°€ë³¸ ê¸¸
 				mark[next_row][next_col] = 1;
 				position.row = row;
 				position.col = col;
 				position.dir =++dir;
-				add(position);// ÇöÀç ÁÂÇ¥¿Í ¹æÇâÀ»stackÀúÀå
-				row = next_row;// ¾È °¡º» ±æ·Î ÀüÁø. ¹æÇâÀº ºÏÂÊ
+				add(position);// í˜„ìž¬ ì¢Œí‘œì™€ ë°©í–¥ì„stackì €ìž¥
+				row = next_row;// ì•ˆ ê°€ë³¸ ê¸¸ë¡œ ì „ì§„. ë°©í–¥ì€ ë¶ìª½
 				col = next_col;
 				dir = 0;
 			}
 			else ++dir;
 		} }
-	if (found) {// stack¿¡ ÀúÀåµÈ °æ·Î Ãâ·Â //¸¶Áö¸· ÁöÁ¡±îÁö ½ºÅÃ¿¡ ³Öµµ·Ï º¯°æ
+	if (found) {// stackì— ì €ìž¥ëœ ê²½ë¡œ ì¶œë ¥ //ë§ˆì§€ë§‰ ì§€ì ê¹Œì§€ ìŠ¤íƒì— ë„£ë„ë¡ ë³€ê²½
 		position.row = row;
 		position.col = col;
 		position.dir = 0;
@@ -103,7 +103,7 @@ void path(void) {// ¹Ì·Î¸¦ Åë°úÇÏ´Â °æ·Î°¡ Á¸ÀçÇÒ °æ¿ì, ÀÌ¸¦ Ãâ·Â
 	else printf( " The maze does not have a path\n" );
 }
 
-void print_path() {//º® = "|" // ºó°÷ = " " //Áö³ª¿Â °æ·Î = "_" //ÃÖÁ¾°æ·Î = "o"
+void print_path() {//ë²½ = "|" // ë¹ˆê³³ = " " //ì§€ë‚˜ì˜¨ ê²½ë¡œ = "_" //ìµœì¢…ê²½ë¡œ = "o"
 	for (int i = 0; i < ROWS; i++) {
 		printf(" ");
 		for (int j = 0; j < COLS; j++) {
@@ -129,7 +129,7 @@ void print_path() {//º® = "|" // ºó°÷ = " " //Áö³ª¿Â °æ·Î = "_" //ÃÖÁ¾°æ·Î = "o"
 	}
 }
 
-void print_maze() {//ºó °÷ = "  " //Áö³ª¿Â °æ·Î = " @" //ÃÖÁ¾°æ·Î = " v"
+void print_maze() {//ë¹ˆ ê³³ = "  " //ì§€ë‚˜ì˜¨ ê²½ë¡œ = " @" //ìµœì¢…ê²½ë¡œ = " v"
 	printf("\n");
 	for (int i = 0; i < ROWS; i++) {
 		printf(" ");
@@ -145,7 +145,7 @@ void print_maze() {//ºó °÷ = "  " //Áö³ª¿Â °æ·Î = " @" //ÃÖÁ¾°æ·Î = " v"
 }
 
 
-//¿©±â¼­ºÎÅÍ BFS///////////////////////////////////////////
+//ì—¬ê¸°ì„œë¶€í„° BFS///////////////////////////////////////////
 /*
 typedef struct {
 	short int row;
@@ -157,7 +157,7 @@ typedef struct {
 int rear = -1, front = -1;
 
 void addq(elementq item)
-{ // Queue¿¡ »õ·Î¿î Ç×¸ñÀ» Ãß°¡
+{ // Queueì— ìƒˆë¡œìš´ í•­ëª©ì„ ì¶”ê°€
 	if (rear >= ((MAX_Q_SIZE) - 1)) {
 		printf("queue is full.");
 		return;
@@ -167,7 +167,7 @@ void addq(elementq item)
 }
 
 elementq deleteq()
-{ // QueueÀÇ Ç×¸ñÀ» return
+{ // Queueì˜ í•­ëª©ì„ return
 	if (front == rear){
 		printf("queue is empty.");
 	}
@@ -188,26 +188,26 @@ void bfs() {
 	move_[6].x = 0; move_[6].y = -1;
 	move_[7].x = -1; move_[7].y = -1;
 
-	// ¹Ì·ÎÀÇ ÀÔ±¸ÁÂÇ¥¿Í E ¹æÇâÀ¸·Î stack ÃÊ±âÈ­
+	// ë¯¸ë¡œì˜ ìž…êµ¬ì¢Œí‘œì™€ E ë°©í–¥ìœ¼ë¡œ stack ì´ˆê¸°í™”
 	mark[START_ROW][START_COL] = 1; front = -1;
 	position.row = START_ROW; position.col = START_COL; position.p_row = 0; position.p_col = 0;
 	addq(position);
 
-	while (rear < ((MAX_Q_SIZE)-1)&&!found) {// queue°¡ max°¡ ¾Æ´Ï°í, ¾ÆÁ÷
-								   // °æ·Î¸¦ ¹ß°ß ¸øÇÒ ¶§±îÁö ½ÇÇà
-		position = deleteq();//Å¥ÀÇ front¸¦ 1 Áõ°¡ ½ÃÅ°°í ´ÙÀ½ positionÀº queueÀÇ front¿¡ ÇØ´çÇÏ´Â À§Ä¡·Î ¼³Á¤ÇÑ´Ù. 
-		row = position.row; //-> delete ÇÏ¿© positionÀ» °¡Á®¿Â´Ù.
+	while (rear < ((MAX_Q_SIZE)-1)&&!found) {// queueê°€ maxê°€ ì•„ë‹ˆê³ , ì•„ì§
+								   // ê²½ë¡œë¥¼ ë°œê²¬ ëª»í•  ë•Œê¹Œì§€ ì‹¤í–‰
+		position = deleteq();//íì˜ frontë¥¼ 1 ì¦ê°€ ì‹œí‚¤ê³  ë‹¤ìŒ positionì€ queueì˜ frontì— í•´ë‹¹í•˜ëŠ” ìœ„ì¹˜ë¡œ ì„¤ì •í•œë‹¤. 
+		row = position.row; //-> delete í•˜ì—¬ positionì„ ê°€ì ¸ì˜¨ë‹¤.
 		col = position.col;
 
-		//ÇöÀç row col ÁÂÇ¥¿¡ ´ëÇØ 8¹æÇâ ¸ðµÎ °Ë»çÇØ ¾È°¡º» ¶¥ÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ°í Å¥¿¡ ³Ö´Â´Ù.
+		//í˜„ìž¬ row col ì¢Œí‘œì— ëŒ€í•´ 8ë°©í–¥ ëª¨ë‘ ê²€ì‚¬í•´ ì•ˆê°€ë³¸ ë•…ì´ ìžˆëŠ”ì§€ í™•ì¸í•˜ê³  íì— ë„£ëŠ”ë‹¤.
 		while (dir < 8 && !found) {
 			next_row = row + move_[dir].x;// move in direction dir
 			next_col = col + move_[dir].y;
 			if (next_row == EXIT_ROW && next_col == EXIT_COL) {
-				found = 1;// Ãâ±¸ ¹ß°ß. °æ·Î´Â ¾îµð¿¡?
+				found = 1;// ì¶œêµ¬ ë°œê²¬. ê²½ë¡œëŠ” ì–´ë””ì—?
 			}
 			else if (!maze[next_row][next_col] &&
-				!mark[next_row][next_col]) {// ¾ÆÁ÷ ¾È °¡º» ±æ
+				!mark[next_row][next_col]) {// ì•„ì§ ì•ˆ ê°€ë³¸ ê¸¸
 				mark[next_row][next_col] = 1;
 				position.row = next_row; position.col = next_col; position.p_row = row; position.p_col = col;
 				addq(position);
@@ -216,27 +216,27 @@ void bfs() {
 		}
 		dir = 0;
 	}
-	if (found) {// queue¿¡ ¸¶Áö¸· ÁöÁ¡¿¡ ´ëÇÑ Á¤º¸¸¦ ³Ö°í ¸¶Áö¸· Á¡ºÎÅÍ °Å²Ù·Î °æ·Î¸¦ µÇµ¹¾Æ°£´Ù.
+	if (found) {// queueì— ë§ˆì§€ë§‰ ì§€ì ì— ëŒ€í•œ ì •ë³´ë¥¼ ë„£ê³  ë§ˆì§€ë§‰ ì ë¶€í„° ê±°ê¾¸ë¡œ ê²½ë¡œë¥¼ ë˜ëŒì•„ê°„ë‹¤.
 		element po;
 		position.row = EXIT_ROW; position.col = EXIT_COL; position.p_row = row; position.p_col = col;
 		addq(position);
 		row = EXIT_ROW; col = EXIT_COL;
 		int p = 0;
-		while(1) {//Ã¹¹øÂ° ÁöÁ¡À¸·Î µ¹¾Æ°¥¶§±îÁö
+		while(1) {//ì²«ë²ˆì§¸ ì§€ì ìœ¼ë¡œ ëŒì•„ê°ˆë•Œê¹Œì§€
 			//printf("wow");
 			printf("%d, %d\n",row, col);
-			po.row = row; po.col = col; po.dir = 0; //³¡Á¡ºÎÅÍ ½ÃÀÛÇØ¼­ ÇöÀç À§Ä¡...
-			add(po);//½ºÅÃ¿¡ ³Ö°í
-			if (row == START_ROW && col == START_COL) {//Ã¹¹øÂ° ÁöÁ¡ µµÂø
+			po.row = row; po.col = col; po.dir = 0; //ëì ë¶€í„° ì‹œìž‘í•´ì„œ í˜„ìž¬ ìœ„ì¹˜...
+			add(po);//ìŠ¤íƒì— ë„£ê³ 
+			if (row == START_ROW && col == START_COL) {//ì²«ë²ˆì§¸ ì§€ì  ë„ì°©
 				break;
 			}
-			//queue¸¦ µÚ¿¡¼­ ºÎÅÍ º¸¸é¼­ ÇöÀç À§Ä¡¿¡ µµ´ÞÇÒ¶§±îÁö deleteÇØ¼­ »Ì¾Æ¿À´Ù°¡
-			//ÇöÀç À§Ä¡¸é ±×°ÍÀÇ ºÎ¸ð¸¦ ºÒ·¯¿ö¼­ ÇöÀç À§Ä¡·Î ¹Ù²ãÁÜ
+			//queueë¥¼ ë’¤ì—ì„œ ë¶€í„° ë³´ë©´ì„œ í˜„ìž¬ ìœ„ì¹˜ì— ë„ë‹¬í• ë•Œê¹Œì§€ deleteí•´ì„œ ë½‘ì•„ì˜¤ë‹¤ê°€
+			//í˜„ìž¬ ìœ„ì¹˜ë©´ ê·¸ê²ƒì˜ ë¶€ëª¨ë¥¼ ë¶ˆëŸ¬ì›Œì„œ í˜„ìž¬ ìœ„ì¹˜ë¡œ ë°”ê¿”ì¤Œ
 			//position = queue[front--];
 			while (position.row != row||position.col!=col) {
-				position = queue[front--]; //¿©±â¼­ºÎÅÍ
+				position = queue[front--]; //ì—¬ê¸°ì„œë¶€í„°
 			}
-			row = position.p_row; col = position.p_col;//ºÎ¸ð Ã£¾Æ¼­ ÇöÀç À§Ä¡·Î º¯°æ
+			row = position.p_row; col = position.p_col;//ë¶€ëª¨ ì°¾ì•„ì„œ í˜„ìž¬ ìœ„ì¹˜ë¡œ ë³€ê²½
 		}
 	}
 	else printf(" The maze does not have a path\n");
@@ -260,7 +260,7 @@ struct compare {
 priority_queue<Node, vector<Node>, compare> q;
 
 int evaluation(Node n) {
-	//positionÀ» ÇÏ³ª ¹ÞÀ¸¸é °Å±â¿¡ ´ëÇÑ Æò°¡ ÇÔ¼ö¸¦ Àû¿ëÇÏ¿© Á¡¼ö ¹ÝÈ¯
+	//positionì„ í•˜ë‚˜ ë°›ìœ¼ë©´ ê±°ê¸°ì— ëŒ€í•œ í‰ê°€ í•¨ìˆ˜ë¥¼ ì ìš©í•˜ì—¬ ì ìˆ˜ ë°˜í™˜
 	int a, b;
 	a = n.row - EXIT_ROW;
 	a = a * a;
@@ -284,27 +284,27 @@ void best_fit() {
 	move_[6].x = 0; move_[6].y = -1;
 	move_[7].x = -1; move_[7].y = -1;
 
-	// ¹Ì·ÎÀÇ ÀÔ±¸ÁÂÇ¥¿Í E ¹æÇâÀ¸·Î queue ÃÊ±âÈ­
+	// ë¯¸ë¡œì˜ ìž…êµ¬ì¢Œí‘œì™€ E ë°©í–¥ìœ¼ë¡œ queue ì´ˆê¸°í™”
 	mark[START_ROW][START_COL] = 1;
 	position.row = START_ROW; position.col = START_COL; position.p_row = 0; position.p_col = 0; position.score = evaluation(position);
-	q.push(position); //½ÃÀÛÁ¡ ³Ö±â
+	q.push(position); //ì‹œìž‘ì  ë„£ê¸°
 	vnodes++;
 
-	while (!found) {// queue°¡ max°¡ ¾Æ´Ï°í, ¾ÆÁ÷ °æ·Î¸¦ ¹ß°ß ¸øÇÒ ¶§±îÁö ½ÇÇà
-		row = q.top().row; //min heapÀÇ top°ªÀ» °¡Á®¿Í¼­
+	while (!found) {// queueê°€ maxê°€ ì•„ë‹ˆê³ , ì•„ì§ ê²½ë¡œë¥¼ ë°œê²¬ ëª»í•  ë•Œê¹Œì§€ ì‹¤í–‰
+		row = q.top().row; //min heapì˜ topê°’ì„ ê°€ì ¸ì™€ì„œ
 		col = q.top().col;
 		story[index++] = q.top();
 		q.pop();
 
-		//ÇöÀç row col ÁÂÇ¥¿¡ ´ëÇØ 8¹æÇâ ¸ðµÎ °Ë»çÇØ ¾È°¡º» ¶¥ÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ°í Å¥¿¡ ³Ö´Â´Ù.
+		//í˜„ìž¬ row col ì¢Œí‘œì— ëŒ€í•´ 8ë°©í–¥ ëª¨ë‘ ê²€ì‚¬í•´ ì•ˆê°€ë³¸ ë•…ì´ ìžˆëŠ”ì§€ í™•ì¸í•˜ê³  íì— ë„£ëŠ”ë‹¤.
 		while (dir < 8 && !found) {
 			next_row = row + move_[dir].x;// move in direction dir
 			next_col = col + move_[dir].y;
 			if (next_row == EXIT_ROW && next_col == EXIT_COL) {
-				found = 1;// Ãâ±¸ ¹ß°ß. °æ·Î´Â ¾îµð¿¡?
+				found = 1;// ì¶œêµ¬ ë°œê²¬. ê²½ë¡œëŠ” ì–´ë””ì—?
 			}
 			else if (!maze[next_row][next_col] &&
-				!mark[next_row][next_col]) {// ¾ÆÁ÷ ¾È °¡º» ±æ
+				!mark[next_row][next_col]) {// ì•„ì§ ì•ˆ ê°€ë³¸ ê¸¸
 				mark[next_row][next_col] = 1;
 				position.row = next_row; position.col = next_col; position.p_row = row; position.p_col = col, position.score = evaluation(position);
 				q.push(position);
@@ -315,7 +315,7 @@ void best_fit() {
 		}
 		dir = 0;
 	}
-	if (found) {// queue¿¡ ¸¶Áö¸· ÁöÁ¡¿¡ ´ëÇÑ Á¤º¸¸¦ ³Ö°í ¸¶Áö¸· Á¡ºÎÅÍ °Å²Ù·Î °æ·Î¸¦ µÇµ¹¾Æ°£´Ù.
+	if (found) {// queueì— ë§ˆì§€ë§‰ ì§€ì ì— ëŒ€í•œ ì •ë³´ë¥¼ ë„£ê³  ë§ˆì§€ë§‰ ì ë¶€í„° ê±°ê¾¸ë¡œ ê²½ë¡œë¥¼ ë˜ëŒì•„ê°„ë‹¤.
 		element po;
 		position.row = EXIT_ROW; position.col = EXIT_COL; position.p_row = row; position.p_col = col;
 		q.push(position);
@@ -323,27 +323,27 @@ void best_fit() {
 		story[index] = position;
 
 		row = EXIT_ROW; col = EXIT_COL;
-		while (1) {//Ã¹¹øÂ° ÁöÁ¡À¸·Î µ¹¾Æ°¥¶§±îÁö
+		while (1) {//ì²«ë²ˆì§¸ ì§€ì ìœ¼ë¡œ ëŒì•„ê°ˆë•Œê¹Œì§€
 			//printf("wow");
 			//printf("%d, %d\n", row, col);
-			po.row = row; po.col = col; po.dir = 0; //³¡Á¡ºÎÅÍ ½ÃÀÛÇØ¼­ ÇöÀç À§Ä¡...
-			add(po);//½ºÅÃ¿¡ ³Ö°í
-			if (row == START_ROW && col == START_COL) {//Ã¹¹øÂ° ÁöÁ¡ µµÂø
+			po.row = row; po.col = col; po.dir = 0; //ëì ë¶€í„° ì‹œìž‘í•´ì„œ í˜„ìž¬ ìœ„ì¹˜...
+			add(po);//ìŠ¤íƒì— ë„£ê³ 
+			if (row == START_ROW && col == START_COL) {//ì²«ë²ˆì§¸ ì§€ì  ë„ì°©
 				break;
 			}
-			//queue¸¦ µÚ¿¡¼­ ºÎÅÍ º¸¸é¼­ ÇöÀç À§Ä¡¿¡ µµ´ÞÇÒ¶§±îÁö deleteÇØ¼­ »Ì¾Æ¿À´Ù°¡
-			//ÇöÀç À§Ä¡¸é ±×°ÍÀÇ ºÎ¸ð¸¦ ºÒ·¯¿ö¼­ ÇöÀç À§Ä¡·Î ¹Ù²ãÁÜ
+			//queueë¥¼ ë’¤ì—ì„œ ë¶€í„° ë³´ë©´ì„œ í˜„ìž¬ ìœ„ì¹˜ì— ë„ë‹¬í• ë•Œê¹Œì§€ deleteí•´ì„œ ë½‘ì•„ì˜¤ë‹¤ê°€
+			//í˜„ìž¬ ìœ„ì¹˜ë©´ ê·¸ê²ƒì˜ ë¶€ëª¨ë¥¼ ë¶ˆëŸ¬ì›Œì„œ í˜„ìž¬ ìœ„ì¹˜ë¡œ ë°”ê¿”ì¤Œ
 			//position = queue[front--];
 			while (position.row != row || position.col != col) {
-				position = story[index--]; //¿©±â¼­ºÎÅÍ
+				position = story[index--]; //ì—¬ê¸°ì„œë¶€í„°
 			}
-			row = position.p_row; col = position.p_col;//ºÎ¸ð Ã£¾Æ¼­ ÇöÀç À§Ä¡·Î º¯°æ
+			row = position.p_row; col = position.p_col;//ë¶€ëª¨ ì°¾ì•„ì„œ í˜„ìž¬ ìœ„ì¹˜ë¡œ ë³€ê²½
 		}
 	}
 	else printf(" The maze does not have a path\n");
 }
 
-int main() { //DFS³ª BFSÁß ÇÏ³ª¸¸ ½ÇÇà
+int main() { //DFSë‚˜ BFSì¤‘ í•˜ë‚˜ë§Œ ì‹¤í–‰
 	/* DFS
 	path();
 	for (int i = 0; i <= top; i++) {
