@@ -1,4 +1,0 @@
-﻿  maze0.cpp
-C:\Users\Jeong\source\repos\Best_fit\maze0.cpp(45,6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
-C:\Users\Jeong\source\repos\Best_fit\maze0.cpp(274,6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
-  Best_fit.vcxproj -> C:\Users\Jeong\source\repos\Best_fit\x64\Debug\Best_fit.exe
